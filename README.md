@@ -1,2 +1,2 @@
 # hw02
-comp333 HW3
+comp333 HW2
