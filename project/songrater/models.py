@@ -20,4 +20,5 @@ class Ratings(models.Model):
     username = models.ForeignKey(Users, on_delete = models.CASCADE)
     song = models.ForeignKey(Artist, on_delete= models.CASCADE)
     rating = models.IntegerField(max_length=1)
-
+    def __str__(self):
+        return self.song + '->' + str(self.rating)
