@@ -15,9 +15,16 @@ def home(request):
     context = {'message':''}
     if 'register' in request.POST:
         username_input = request.POST.get('username-register')
+        password_input = request.POST.get('password')
         name_count = (Users.objects.filter(username=username_input)).count()
-        if name_count == 0:
-            user = Users(username = username_input, password = request.POST.get('password'))
+        if username_input == '': 
+            context = {'message': 'Please enter your username.'}
+        elif ' ' in username_input: # username cannot contain space
+            context = {'message': 'Please enter a valid username.'}
+        elif password_input == '':
+            context = {'message':'Please enter your password.'}
+        elif name_count == 0:
+            user = Users(username = username_input, password = password_input)
             user.save()
             context = {'message':'Successfully registered.'}
         else:
