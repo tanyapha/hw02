@@ -21,9 +21,13 @@
       <input type="text" name="username-songs" id="username-songs" /><br />
       <input type="submit" name="retrieve" value="Retrieve" />
     </form>
-    {% for r in ratings%}
-    <li>{{r.song_id}} -> {{r.rating}}</li>
-    {% endfor %}
+    {%if ratings_error%} {{ratings_error}} {%else%}
+    <div>
+      {% for r in ratings%}
+      <li>{{r.song_id}} -> {{r.rating}}</li>
+      {% endfor %}
+    </div>
+    {%endif%}
 
     <h2>Retrieve Albums by an Artist</h2>
     <form method="POST" action="">
@@ -35,8 +39,12 @@
         value="retrieve-by-artist"
       />
     </form>
-    {% for a in albums%}
-    <li>{{a.title}} -> {{a.number_of_songs}}</li>
-    {% endfor %}
+    {%if albums_error%} {{albums_error}} {%else%}
+    <div>
+      {{artist}} {% for a in albums%}
+      <li>{{a.title}} -> {{a.number_of_songs}}</li>
+      {% endfor %}
+    </div>
+    {%endif%}
   </body>
 </html>
