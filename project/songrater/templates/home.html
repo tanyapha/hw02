@@ -1,27 +1,29 @@
 <!DOCTYPE html>
-<html lang='en'>
-<head>
-  <meta charset="UTF-8">
-  <title>Music-db</title>
-</head>
-<body>
-<h2>Registration</h2>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Music-db</title>
+  </head>
+  <body>
+    <h2>Registration</h2>
 
-<form method="POST" action="">
-    {% csrf_token %}
-Username: <input type="text" name="Username" placeholder="" /><br>
-Password: <input type='text' name="Password" placeholder="" /><br>
-<input type="submit" name="register" value="Register"/>
-</form>
-{{ message }}
+    <form method="POST" action="">
+      {% csrf_token %} Username:
+      <input type="text" name="username-register" placeholder="" /><br />
+      Password: <input type="text" name="password" placeholder="" /><br />
+      <input type="submit" name="register" value="Register" />
+    </form>
+    {{ message }}
 
-<h2> Retrieve songs by username</h2>
-<form method="POST" action="">
-    {% csrf_token %}
-Username: <input type="text" name="Username"/><br>
-<input type="submit" name="retrieve" value="Retrieve"/>
-</form>
-{{ ratings}}
-</body>
-
+    <h2>Retrieve songs by username</h2>
+    <form method="POST" action="">
+      {% csrf_token %} Username:
+      <input type="text" name="username-songs" id="username-songs" /><br />
+      <input type="submit" name="retrieve" value="Retrieve" />
+    </form>
+    {% for r in ratings%}
+    <li>{{r.song_id}} -> {{r.rating}}</li>
+    <!-- {{ ratings}} -->
+    {% endfor %}
+  </body>
 </html>
