@@ -23,7 +23,20 @@
     </form>
     {% for r in ratings%}
     <li>{{r.song_id}} -> {{r.rating}}</li>
-    <!-- {{ ratings}} -->
+    {% endfor %}
+
+    <h2>Retrieve Albums by an Artist</h2>
+    <form method="POST" action="">
+      {% csrf_token %} Username:
+      <input type="text" name="artist-name" /><br />
+      <input
+        type="submit"
+        name="retrieve-by-artist"
+        value="retrieve-by-artist"
+      />
+    </form>
+    {% for a in albums%}
+    <li>{{a.title}} -> {{a.number_of_songs}}</li>
     {% endfor %}
   </body>
 </html>

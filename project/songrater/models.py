@@ -29,7 +29,7 @@ class Ratings(models.Model):
 
 class Albums(models.Model):
     title = models.CharField(max_length=255)
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    artist = models.ForeignKey(ArtistInformation, on_delete=models.CASCADE)
     release_date = models.DateField()
     number_of_songs = models.IntegerField()
 
