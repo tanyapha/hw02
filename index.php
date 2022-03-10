@@ -16,88 +16,84 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="application/x-www-form-urlencoded"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <title>Online Music Rating Platform</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <nav>
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#registration">Register</a></li>
-      <li><a href="#retrieval">Retrieve</a></li>
+    <ul class="nav-content">
+      <li class="nav-items"><a href="#home">Home</a></li>
+      <li class="nav-items"><a href="#registration">Register</a></li>
+      <li class="nav-items"><a href="#retrieval">Find Songs</a></li>
     </ul>
   </nav>
 
-  <hr>
-
-  <header id="home">
-    <h1> music-db </h1>
-    <h1 class="message">Rate songs, and connect with listeners all over the world.</h1>
-　</header>
-
-  <hr>
-
-  <section id="registration">
-    <h1>Registration</h1>
-
-    <?php
-      $servername = "localhost";
-      $username = "root";
-      $password = "";
-      $dbname = "music-db";
-      $conn = new mysqli($servername, $username, $password, $dbname);
-      if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-      }
-
-      if(isset($_REQUEST["submit"])){
-        $out_value1 = "";
-        $user_name = $_REQUEST['username'];
-        $pwd = $_REQUEST['password'];
-
-        if(!empty($user_name) && !empty($pwd)){
-          $sql1 = "SELECT * FROM users WHERE username = ('$user_name')";
-          $result1 = mysqli_query($conn, $sql1);
-
-          if (mysqli_num_rows($result1) == 0) {
-            $sql2 = "INSERT INTO users (username, password) VALUES ('$user_name', '$pwd')";
-            $result2 = mysqli_query($conn, $sql2);
-            $out_value1 = "Successfully registered.";
+  <div id=sign-up>
+    <header id="home">
+      <h1 class="title"> Music DB </h1>
+      <p class="message">Rate songs, and connect with listeners all over the world.</p>
+    　</header>
+    <section id="registration">
+      <h1 id = create-account>Create an Account</h1>
+      <?php
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "music-db";
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+        }
+        if(isset($_REQUEST["submit"])){
+          $out_value1 = "";
+          $user_name = $_REQUEST['username'];
+          $pwd = $_REQUEST['password'];
+          if(!empty($user_name) && !empty($pwd)){
+            $sql1 = "SELECT * FROM users WHERE username = ('$user_name')";
+            $result1 = mysqli_query($conn, $sql1);
+            if (mysqli_num_rows($result1) == 0) {
+              $sql2 = "INSERT INTO users (username, password) VALUES ('$user_name', '$pwd')";
+              $result2 = mysqli_query($conn, $sql2);
+              $out_value1 = "Successfully registered.";
+            }
+            else {
+              $out_value1 = "This username already exists.";
+            }
+          }
+          elseif (empty($user_name) && !empty($pwd)) {
+            $out_value1 = "Please enter username.";
+          }
+          elseif (!empty($user_name) && empty($pwd)) {
+            $out_value1 = "Please enter password.";
           }
           else {
-            $out_value1 = "This username already exists.";
+            $out_value1 = "Please enter username and password.";
           }
         }
-        elseif (empty($user_name) && !empty($pwd)) {
-          $out_value1 = "Please enter username.";
-        }
-        elseif (!empty($user_name) && empty($pwd)) {
-          $out_value1 = "Please enter password.";
-        }
-        else {
-          $out_value1 = "Please enter username and password.";
-        }
-      }
+        $conn->close();
+      ?>
+      <form method="GET" action="">
+         </br> <input type="text" class="form_input" name="username"
+                              placeholder= "username"/><br>
+                <input type="text" class="form_input" 
+                              name="password" placeholder="password"/><br>
+        <input type="submit" class="submit" name="submit" value="Register"/>
+        <p class="output"><?php
+          if(!empty($out_value1)){
+            echo $out_value1;
+          }
+        ?></p>
+      </form>
+    </section>
+  </div>
 
-      $conn->close();
-    ?>
-
-    <form method="GET" action="">
-      Username </br> <input type="text" class="form_input" name="username"/><br>
-      Password </br> <input type="text" class="form_input" name="password"/><br>
-      <input type="submit" class="submit" name="submit" value="Register"/>
-
-      <p class="output"><?php
-        if(!empty($out_value1)){
-          echo $out_value1;
-        }
-      ?></p>
-    </form>
-  </section>
   <!-- registration section ends -->
 
-  <hr>
+  <!-- <hr> -->
 
   <section id="retrieval">
     <h1>Retrieve songs by username</h1>
