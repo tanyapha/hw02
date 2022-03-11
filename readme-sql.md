@@ -1,4 +1,15 @@
-<!-- Instruction: Please copy and paste the following queries on phpmyadmin. -->
+# Problem 1 : PHP
+
+## Setting up PHP
+
+1. Start up xampp
+2. Add the index.php file and the style.css file into the lamp/htdocs directory
+
+## Creating the sql database
+
+1. Go to the phpmyadmin page
+2. Create a database called music-db
+3. Add the following SQL code into the database
 
 ```sql
 CREATE TABLE users (username VARCHAR(255) PRIMARY KEY, password VARCHAR(255));
