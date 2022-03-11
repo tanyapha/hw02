@@ -32,14 +32,18 @@ def home(request):
     elif 'retrieve' in request.POST:
         username_input = request.POST.get('username-songs')
         rating = Ratings.objects.filter(username_id=username_input).values("song_id","rating")
-        if rating.count() == 0:
+        if username_input == '': 
+            context = {'ratings_error': 'Please enter a username.'}
+        elif rating.count() == 0:
             context["ratings_error"] = "No username found"
         else:
             context["ratings"] = rating
     elif 'retrieve-by-artist' in request.POST:
         artist_input = (request.POST.get('artist-name')).title()
         artist_albums = {"artist": artist_input,'albums':Albums.objects.filter(artist_id = artist_input).values("title","number_of_songs")}
-        if artist_albums['albums'].count == 0:
+        if artist_input == "":
+            context["albums_error"] = 'Please enter an artist name'
+        elif artist_albums['albums'].count() == 0:
             context["albums_error"] = 'No albums found'
         else:
             context = artist_albums
