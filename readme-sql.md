@@ -31,3 +31,7 @@ INSERT INTO ratings (username, song, rating) VALUES("Amelia-Earhart", "Days of W
 INSERT INTO ratings (username, song, rating) VALUES("Otto", "Days of Wine and Roses", 5);
 INSERT INTO ratings (username, song, rating) VALUES("Amelia-Earhart", "These walls", 4);
 ```
+
+## Head to Website
+
+Go to localhost:8080/
