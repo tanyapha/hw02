@@ -2,6 +2,8 @@
 
 The songrater app for COMP333 Software Engineering.
 
+## Setup
+
 From within the project directory, run the Songrater App with: (If you are using the fish shell, run `source my-venv/bin/activate.fish`)
 
 ```shell
@@ -28,3 +30,10 @@ Then, in your browser, go to:
 ```url
 http://127.0.0.1:8000/songrater
 ```
+
+## Testing
+
+To test the Retrieve Albums by an Artist try
+
+1. Taylor Swift
+2. Bruno Mars
