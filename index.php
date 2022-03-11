@@ -144,6 +144,9 @@
 
       <p class="output">
         <?php
+
+        $out_value2 = isset($out_value2)? $out_value2 : [];
+
         foreach ($out_value2 as $value) {
           echo $value . "<br/>";
         }
